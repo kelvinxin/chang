@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+{% block title %}学生控制面板 - 启梦教育{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 p-0">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h6 class="sidebar-title">学生系统</h6>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('student_dashboard') }}">
+                                <i class="fas fa-tachometer-alt"></i>控制面板
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_schedule') }}">
+                                <i class="fas fa-calendar"></i>课程表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_materials') }}">
+                                <i class="fas fa-book"></i>学习资料
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_leave_request') }}">
+                                <i class="fas fa-calendar-times"></i>请假申请
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_speech_practice') }}">
+                                <i class="fas fa-microphone"></i>AI口语练习
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_profile') }}">
+                                <i class="fas fa-user"></i>个人资料
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-md-9 col-lg-10">
+                <div class="dashboard-header">
+                    <div class="container-fluid">
+                        <h1 class="dashboard-title">欢迎回来，{{ current_user.username }}！</h1>
+                        <p class="dashboard-subtitle">今天是 {{ current_date }}，继续您的中文学习之旅</p>
+                    </div>
+                </div>
+
+            <div class="container-fluid">
+                <!-- 统计卡片 -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card">
+                            <div class="stats-number">{{ enrollments|length }}</div>
+                            <div class="stats-label">已注册课程</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, var(--success-color), #059669);">
+                            <div class="stats-number">{{ upcoming_lessons|length }}</div>
+                            <div class="stats-label">即将上课</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, var(--warning-color), #d97706);">
+                            <div class="stats-number">{{ pending_requests }}</div>
+                            <div class="stats-label">待审批请假</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                            <div class="stats-number">85%</div>
+                            <div class="stats-label">学习进度</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- 今日课程 -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-calendar-day me-2"></i>今日课程安排
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% if upcoming_lessons %}
+                                    <div class="row g-3">
+                                        {% for lesson in upcoming_lessons[:3] %}
+                                        <div class="col-12">
+                                            <div class="d-flex align-items-center p-3 bg-light rounded">
+                                                <div class="feature-icon me-3" style="width: 48px; height: 48px; font-size: 20px;">
+                                                    <i class="fas fa-chalkboard-teacher"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">{{ lesson.title }}</h6>
+                                                    <p class="text-muted mb-1">{{ lesson.course.name }}</p>
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-clock me-1"></i>{{ lesson.lesson_date.strftime('%H:%M') }}
+                                                        <i class="fas fa-map-marker-alt ms-3 me-1"></i>{{ lesson.classroom or '在线课程' }}
+                                                    </small>
+                                                </div>
+                                                <div>
+                                                    {% if lesson.online_link %}
+                                                    <a href="{{ lesson.online_link }}" class="btn btn-primary btn-sm" target="_blank">
+                                                        <i class="fas fa-video me-1"></i>进入课堂
+                                                    </a>
+                                                    {% else %}
+                                                    <span class="badge badge-secondary">线下课程</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-calendar-times text-muted" style="font-size: 3rem;"></i>
+                                        <h6 class="mt-3 text-muted">今天没有安排课程</h6>
+                                        <p class="text-muted">享受您的休息时间，或者练习一下口语吧！</p>
+                                        <a href="{{ url_for('student_speech_practice') }}" class="btn btn-outline">
+                                            <i class="fas fa-microphone me-2"></i>AI口语练习
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ url_for('student_schedule') }}" class="btn btn-outline">
+                                    <i class="fas fa-calendar me-2"></i>查看完整课程表
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 快速操作 -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-bolt me-2"></i>快速操作
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-3">
+                                    <a href="{{ url_for('student_speech_practice') }}" class="btn btn-primary">
+                                        <i class="fas fa-microphone me-2"></i>AI口语练习
+                                    </a>
+                                    <a href="{{ url_for('student_materials') }}" class="btn btn-outline">
+                                        <i class="fas fa-download me-2"></i>下载资料
+                                    </a>
+                                    <a href="{{ url_for('student_leave_request') }}" class="btn btn-outline">
+                                        <i class="fas fa-calendar-times me-2"></i>申请请假
+                                    </a>
+                                    <a href="{{ url_for('student_profile') }}" class="btn btn-outline">
+                                        <i class="fas fa-user-edit me-2"></i>编辑资料
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 学习进度 -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>学习进度
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>HSK课程进度</small>
+                                        <small>85%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>口语练习</small>
+                                        <small>72%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 72%; background-color: var(--success-color);"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>作业完成</small>
+                                        <small>90%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 90%; background-color: var(--warning-color);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 我的课程 -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-book-open me-2"></i>我的课程
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% if enrollments %}
+                                    <div class="row g-4">
+                                        {% for enrollment in enrollments %}
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="card h-100 border">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                                        <span class="badge badge-primary">{{ enrollment.course.level }}</span>
+                                                        <span class="badge badge-success">进行中</span>
+                                                    </div>
+                                                    <h6 class="card-title">{{ enrollment.course.name }}</h6>
+                                                    <p class="card-text text-muted">{{ enrollment.course.description[:80] }}...</p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-user me-1"></i>{{ enrollment.course.teacher.full_name }}
+                                                        </small>
+                                                        <small class="text-muted">
+                                                            进度: {{ enrollment.progress }}%
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer bg-white border-top-0">
+                                                    <div class="progress" style="height: 4px;">
+                                                        <div class="progress-bar" style="width: {{ enrollment.progress }}%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-book text-muted" style="font-size: 3rem;"></i>
+                                        <h6 class="mt-3 text-muted">您还没有注册任何课程</h6>
+                                        <p class="text-muted">浏览我们的课程，开始您的中文学习之旅</p>
+                                        <a href="{{ url_for('courses') }}" class="btn btn-primary">
+                                            <i class="fas fa-search me-2"></i>浏览课程
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 页面加载动画
+document.addEventListener('DOMContentLoaded', function() {
+    // 统计数字动画
+    const statsNumbers = document.querySelectorAll('.stats-number');
+    statsNumbers.forEach(stat => {
+        const finalValue = parseInt(stat.textContent);
+        if (!isNaN(finalValue)) {
+            let currentValue = 0;
+            const increment = finalValue / 30;
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    stat.textContent = finalValue + (stat.textContent.includes('%') ? '%' : '');
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = Math.floor(currentValue) + (stat.textContent.includes('%') ? '%' : '');
+                }
+            }, 50);
+        }
+    });
+});
+</script>
+{% endblock %}

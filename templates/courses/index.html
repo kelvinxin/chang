@@ -1,0 +1,666 @@
+{% extends "base.html" %}
+
+{% block title %}中文课程 - 启梦教育{% endblock %}
+
+{% block extra_css %}
+<link href="../static/css/courses-modern.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- 页面头部 - 现代简约风格 -->
+<section class="hero-section-simple">
+    <div class="container">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="hero-title-simple">中文课程</h1>
+                <p class="hero-subtitle-simple">系统化的HSK课程体系，专业的教学团队，让中文学习更高效</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">HSK等级</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">学员</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">通过率</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 课程筛选 - 现代简约风格 -->
+<section class="filter-section-modern">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="filter-buttons-modern">
+                    <button class="filter-btn-modern active" data-filter="all">全部课程</button>
+                    <button class="filter-btn-modern" data-filter="hsk">HSK课程</button>
+                    <button class="filter-btn-modern" data-filter="oral">口语课程</button>
+                    <button class="filter-btn-modern" data-filter="business">商务中文</button>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <select class="form-control-modern">
+                    <option>按难度排序</option>
+                    <option>按价格排序</option>
+                    <option>按评分排序</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 课程列表 - 现代简约风格 -->
+<section class="courses-section-modern">
+    <div class="container">
+        <div class="row g-4">
+            <!-- HSK1课程 -->
+            <div class="col-lg-4 col-md-6" data-category="hsk">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern hsk1">HSK1</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">基础入门班</h3>
+                        <p class="course-description-modern">零基础中文学习，掌握基本汉字、词汇和语法，为进一步学习打下坚实基础</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>40课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>15人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.8分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥1,200</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('hsk1')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSK2课程 -->
+            <div class="col-lg-4 col-md-6" data-category="hsk">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern hsk2">HSK2</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">进阶提升班</h3>
+                        <p class="course-description-modern">在HSK1基础上，扩展词汇量，学习更复杂的语法结构，提升日常交流能力</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>50课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>12人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.9分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥1,500</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('hsk2')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSK3课程 -->
+            <div class="col-lg-4 col-md-6" data-category="hsk">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern hsk3">HSK3</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">中级突破班</h3>
+                        <p class="course-description-modern">中级水平课程，掌握更多实用词汇和语法，能够进行较为复杂的中文交流</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>60课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>10人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.7分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥1,800</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('hsk3')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 口语专项课程 -->
+            <div class="col-lg-4 col-md-6" data-category="oral">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern oral">口语</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">口语强化班</h3>
+                        <p class="course-description-modern">专注口语训练，结合AI智能练习系统，快速提升中文口语表达能力</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>30课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>8人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.9分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥2,000</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('oral')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商务中文课程 -->
+            <div class="col-lg-4 col-md-6" data-category="business">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern business">商务</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">商务中文精品班</h3>
+                        <p class="course-description-modern">专业商务中文培训，涵盖商务谈判、会议交流、商务写作等实用技能</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>40课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>6人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.8分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥2,500</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('business')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSK4课程 -->
+            <div class="col-lg-4 col-md-6" data-category="hsk">
+                <div class="course-card-modern">
+                    <div class="course-header-modern">
+                        <div class="course-level-modern hsk1">HSK4</div>
+                        <div class="course-icon-modern">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                    <div class="course-content-modern">
+                        <h3 class="course-title-modern">高级进阶班</h3>
+                        <p class="course-description-modern">高级中文课程，深入学习复杂语法和高级词汇，达到流利交流水平</p>
+                        <div class="course-features-modern">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>70课时</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>8人班</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.6分</span>
+                            </div>
+                        </div>
+                        <div class="course-footer-modern">
+                            <div class="course-price-modern">
+                                <span class="price-amount">¥2,200</span>
+                                <span class="price-period">/月</span>
+                            </div>
+                            <button class="btn-modern-primary" onclick="showCourseDetail('hsk4')">
+                                了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 学员评价 - 简化版 -->
+<section class="testimonials-simple">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">学员评价</h2>
+            <p class="lead text-secondary">听听学员们的真实学习体验</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="testimonial-card-simple">
+                    <div class="testimonial-avatar-simple">李</div>
+                    <h6 class="testimonial-name">李明华</h6>
+                    <p class="testimonial-role">HSK3学员</p>
+                    <div class="testimonial-rating-simple">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text-simple">"AI口语练习功能让我的发音有了很大改善，现在已经能够流利地进行日常对话了！"</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="testimonial-card-simple">
+                    <div class="testimonial-avatar-simple">A</div>
+                    <h6 class="testimonial-name">Anna Johnson</h6>
+                    <p class="testimonial-role">商务中文学员</p>
+                    <div class="testimonial-rating-simple">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text-simple">"商务中文课程非常实用，现在我可以自信地用中文进行商务谈判了。"</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="testimonial-card-simple">
+                    <div class="testimonial-avatar-simple">T</div>
+                    <h6 class="testimonial-name">Tran Van B</h6>
+                    <p class="testimonial-role">HSK2学员</p>
+                    <div class="testimonial-rating-simple">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text-simple">"从零基础到现在能够阅读中文文章，感谢启梦教育的专业教学。"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 教师团队 - 简化版 -->
+<section class="teachers-simple">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">专业教师团队</h2>
+            <p class="lead text-secondary">经验丰富的中文教师，为您提供专业的教学服务</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="teacher-card-simple">
+                    <div class="teacher-avatar-simple">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h5 class="teacher-name">王老师</h5>
+                    <p class="teacher-title">HSK1-3级专家</p>
+                    <p class="teacher-experience">5年教学经验，擅长零基础教学</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="teacher-card-simple">
+                    <div class="teacher-avatar-simple">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h5 class="teacher-name">李老师</h5>
+                    <p class="teacher-title">口语训练专家</p>
+                    <p class="teacher-experience">8年教学经验，口语教学专家</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="teacher-card-simple">
+                    <div class="teacher-avatar-simple">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h5 class="teacher-name">张老师</h5>
+                    <p class="teacher-title">商务中文专家</p>
+                    <p class="teacher-experience">10年教学经验，商务中文权威</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="teacher-card-simple">
+                    <div class="teacher-avatar-simple">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h5 class="teacher-name">刘老师</h5>
+                    <p class="teacher-title">HSK4-6级专家</p>
+                    <p class="teacher-experience">12年教学经验，高级中文教学</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 评论模态框 -->
+<div class="modal fade" id="reviewModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">分享您的学习体验</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label class="form-label">您的姓名</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">所学课程</label>
+                        <select class="form-control" name="course" required>
+                            <option value="">请选择课程</option>
+                            <option value="HSK1">HSK1 基础入门班</option>
+                            <option value="HSK2">HSK2 进阶提升班</option>
+                            <option value="HSK3">HSK3 中级突破班</option>
+                            <option value="口语">中文口语强化班</option>
+                            <option value="商务">商务中文精品班</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">评分</label>
+                        <div class="rating">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" name="rating" id="ratingValue" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">学习体验</label>
+                        <textarea class="form-control" name="review" rows="4" placeholder="请分享您的学习体验和感受..." required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitReview()">提交评价</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 课程详情模态框 -->
+<div class="modal fade" id="courseDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseDetailTitle">课程详情</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="courseDetailContent">
+                <!-- 课程详情内容将通过JavaScript动态加载 -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">立即报名</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 课程筛选功能
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const courseCards = document.querySelectorAll('[data-category]');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // 更新按钮状态
+            filterButtons.forEach(btn => btn.classList.remove('btn-primary', 'active'));
+            filterButtons.forEach(btn => btn.classList.add('btn-outline'));
+            this.classList.remove('btn-outline');
+            this.classList.add('btn-primary', 'active');
+            
+            // 筛选课程
+            courseCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                    card.classList.add('fade-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // 评分功能
+    const stars = document.querySelectorAll('.rating .fas');
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            document.getElementById('ratingValue').value = rating;
+            
+            stars.forEach((s, index) => {
+                if (index < rating) {
+                    s.classList.add('text-warning');
+                } else {
+                    s.classList.remove('text-warning');
+                }
+            });
+        });
+    });
+});
+
+// 显示课程详情
+function showCourseDetail(courseId) {
+    const courseDetails = {
+        'hsk1': {
+            title: 'HSK1 基础入门班',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">课程介绍</h6>
+                        <p>HSK1是中文学习的起点，适合零基础学员。本课程将帮助您掌握150个基本词汇和基础语法，能够理解和使用简单的中文句子。</p>
+                        
+                        <h6 class="fw-bold mb-3">学习目标</h6>
+                        <ul>
+                            <li>掌握150个常用词汇</li>
+                            <li>学会基本的语法结构</li>
+                            <li>能够进行简单的日常对话</li>
+                            <li>通过HSK1级考试</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">课程安排</h6>
+                        <p>每周3次课，每次2小时，共40课时。小班教学，确保每位学员都能得到充分的关注。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">课程信息</h6>
+                                <p><strong>课时：</strong>40课时</p>
+                                <p><strong>班级人数：</strong>15人</p>
+                                <p><strong>上课时间：</strong>周一、三、五 19:00-21:00</p>
+                                <p><strong>学费：</strong>¥1,200/月</p>
+                                <p><strong>教师：</strong>王老师</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        'hsk2': {
+            title: 'HSK2 进阶提升班',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">课程介绍</h6>
+                        <p>在HSK1基础上，HSK2课程将扩展您的词汇量到300个，学习更复杂的语法结构，提升日常交流能力。</p>
+                        
+                        <h6 class="fw-bold mb-3">学习目标</h6>
+                        <ul>
+                            <li>掌握300个常用词汇</li>
+                            <li>学会复合句和复杂语法</li>
+                            <li>能够描述日常生活和工作</li>
+                            <li>通过HSK2级考试</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">课程安排</h6>
+                        <p>每周3次课，每次2小时，共50课时。注重口语练习和实际应用。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">课程信息</h6>
+                                <p><strong>课时：</strong>50课时</p>
+                                <p><strong>班级人数：</strong>12人</p>
+                                <p><strong>上课时间：</strong>周二、四、六 19:00-21:00</p>
+                                <p><strong>学费：</strong>¥1,500/月</p>
+                                <p><strong>教师：</strong>王老师</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        'oral': {
+            title: '中文口语强化班',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">课程介绍</h6>
+                        <p>专注于中文口语训练的特色课程，结合AI智能练习系统，帮助学员快速提升口语表达能力和发音准确度。</p>
+                        
+                        <h6 class="fw-bold mb-3">学习目标</h6>
+                        <ul>
+                            <li>提升发音准确度</li>
+                            <li>增强口语流利度</li>
+                            <li>掌握日常对话技巧</li>
+                            <li>建立口语表达自信</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">特色功能</h6>
+                        <p>配备AI智能口语练习系统，实时语音识别和发音纠正，个性化学习方案。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">课程信息</h6>
+                                <p><strong>课时：</strong>30课时</p>
+                                <p><strong>班级人数：</strong>8人</p>
+                                <p><strong>上课时间：</strong>周末班</p>
+                                <p><strong>学费：</strong>¥2,000/月</p>
+                                <p><strong>教师：</strong>李老师</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    };
+    
+    const course = courseDetails[courseId];
+    if (course) {
+        document.getElementById('courseDetailTitle').textContent = course.title;
+        document.getElementById('courseDetailContent').innerHTML = course.content;
+        new bootstrap.Modal(document.getElementById('courseDetailModal')).show();
+    }
+}
+
+// 提交评价
+function submitReview() {
+    const form = document.getElementById('reviewForm');
+    const formData = new FormData(form);
+    
+    if (!formData.get('rating')) {
+        alert('请选择评分');
+        return;
+    }
+    
+    // 这里可以添加实际的提交逻辑
+    alert('感谢您的评价！我们会认真考虑您的建议。');
+    bootstrap.Modal.getInstance(document.getElementById('reviewModal')).hide();
+    form.reset();
+    
+    // 重置评分
+    document.querySelectorAll('.rating .fas').forEach(star => {
+        star.classList.remove('text-warning');
+    });
+}
+</script>
+{% endblock %}

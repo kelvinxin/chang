@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+
+{% block title %}请假申请 - 学生系统{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading">学生系统</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_dashboard') }}">
+                            <i class="fas fa-tachometer-alt"></i> 控制面板
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_schedule') }}">
+                            <i class="fas fa-calendar"></i> 课程表
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_materials') }}">
+                            <i class="fas fa-book"></i> 学习资料
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('student_leave_request') }}">
+                            <i class="fas fa-calendar-times"></i> 请假申请
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_speech_practice') }}">
+                            <i class="fas fa-microphone"></i> AI口语练习
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_profile') }}">
+                            <i class="fas fa-user"></i> 个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">请假申请</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLeaveModal">
+                        <i class="fas fa-plus"></i> 新建请假申请
+                    </button>
+                </div>
+            </div>
+
+            <!-- 统计卡片 -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">3</h5>
+                            <p class="card-text">待审批</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">8</h5>
+                            <p class="card-text">已批准</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">1</h5>
+                            <p class="card-text">已拒绝</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">12</h5>
+                            <p class="card-text">总申请数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 请假记录列表 -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">我的请假记录</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>课程</th>
+                                    <th>请假日期</th>
+                                    <th>申请时间</th>
+                                    <th>请假原因</th>
+                                    <th>状态</th>
+                                    <th>审批意见</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">HSK4 综合课程</div>
+                                            <small class="text-muted">HSK4-A班</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">2025-07-25</div>
+                                            <small class="text-muted">09:00 - 11:00</small>
+                                        </div>
+                                    </td>
+                                    <td>2025-07-24 10:30</td>
+                                    <td>
+                                        <span class="text-truncate d-inline-block" style="max-width: 150px;" title="身体不适，需要看医生">
+                                            身体不适，需要看医生
+                                        </span>
+                                    </td>
+                                    <td><span class="badge bg-warning">待审批</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">HSK4 口语课程</div>
+                                            <small class="text-muted">口语-B班</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">2025-07-23</div>
+                                            <small class="text-muted">14:00 - 16:00</small>
+                                        </div>
+                                    </td>
+                                    <td>2025-07-22 16:45</td>
+                                    <td>
+                                        <span class="text-truncate d-inline-block" style="max-width: 150px;" title="家庭紧急事务">
+                                            家庭紧急事务
+                                        </span>
+                                    </td>
+                                    <td><span class="badge bg-success">已批准</span></td>
+                                    <td>
+                                        <small class="text-success">同意请假，注意补课</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">HSK3 综合课程</div>
+                                            <small class="text-muted">HSK3-C班</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">2025-07-20</div>
+                                            <small class="text-muted">10:00 - 12:00</small>
+                                        </div>
+                                    </td>
+                                    <td>2025-07-20 08:30</td>
+                                    <td>
+                                        <span class="text-truncate d-inline-block" style="max-width: 150px;" title="想睡懒觉">
+                                            想睡懒觉
+                                        </span>
+                                    </td>
+                                    <td><span class="badge bg-danger">已拒绝</span></td>
+                                    <td>
+                                        <small class="text-danger">理由不充分，请认真对待学习</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- 新建请假申请模态框 -->
+<div class="modal fade" id="newLeaveModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新建请假申请</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="leaveRequestForm">
+                    <div class="mb-3">
+                        <label for="courseSelect" class="form-label">选择课程</label>
+                        <select class="form-select" id="courseSelect" name="schedule_id" required>
+                            <option value="">请选择要请假的课程</option>
+                            <option value="1">HSK4 综合课程 - 2025-07-26 09:00</option>
+                            <option value="2">HSK4 口语课程 - 2025-07-26 14:00</option>
+                            <option value="3">HSK5 综合课程 - 2025-07-27 10:00</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="leaveReason" class="form-label">请假原因</label>
+                        <textarea class="form-control" id="leaveReason" name="reason" rows="4" required 
+                                  placeholder="请详细说明请假原因，以便老师审批..."></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>请假须知：</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>请提前至少2小时申请请假</li>
+                            <li>请假原因需真实有效</li>
+                            <li>频繁请假可能影响学习进度</li>
+                            <li>请假申请提交后不可修改</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitLeaveRequest()">提交申请</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function submitLeaveRequest() {
+    const form = document.getElementById('leaveRequestForm');
+    const formData = new FormData(form);
+    
+    // 验证表单
+    if (!formData.get('schedule_id')) {
+        alert('请选择要请假的课程');
+        return;
+    }
+    
+    if (!formData.get('reason').trim()) {
+        alert('请填写请假原因');
+        return;
+    }
+    
+    // 提交请假申请
+    fetch('/api/leave-requests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('请假申请提交成功！请等待老师审批。');
+            bootstrap.Modal.getInstance(document.getElementById('newLeaveModal')).hide();
+            form.reset();
+            location.reload();
+        } else {
+            alert('提交失败：' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('提交失败，请重试');
+    });
+}
+
+// 表单验证
+document.getElementById('leaveReason').addEventListener('input', function() {
+    const reason = this.value.trim();
+    const submitBtn = document.querySelector('#newLeaveModal .btn-primary');
+    
+    if (reason.length < 10) {
+        this.classList.add('is-invalid');
+        submitBtn.disabled = true;
+    } else {
+        this.classList.remove('is-invalid');
+        submitBtn.disabled = false;
+    }
+});
+</script>
+{% endblock %}

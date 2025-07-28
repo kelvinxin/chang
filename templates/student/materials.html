@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+
+{% block title %}学习资料 - 学生系统{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading">学生系统</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_dashboard') }}">
+                            <i class="fas fa-tachometer-alt"></i> 控制面板
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_schedule') }}">
+                            <i class="fas fa-calendar"></i> 课程表
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('student_materials') }}">
+                            <i class="fas fa-book"></i> 学习资料
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_leave_request') }}">
+                            <i class="fas fa-calendar-times"></i> 请假申请
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_speech_practice') }}">
+                            <i class="fas fa-microphone"></i> AI口语练习
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_profile') }}">
+                            <i class="fas fa-user"></i> 个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">学习资料</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="filterMaterials('all')">全部</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="filterMaterials('pdf')">PDF</button>
+                        <button type="button" class="btn btn-outline-success btn-sm" onclick="filterMaterials('video')">视频</button>
+                        <button type="button" class="btn btn-outline-warning btn-sm" onclick="filterMaterials('audio')">音频</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 搜索栏 -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" id="searchInput" placeholder="搜索资料标题或描述...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="courseFilter">
+                        <option value="">所有课程</option>
+                        {% for class in student_classes %}
+                        <option value="{{ class.id }}">{{ class.course.name }} - {{ class.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="sortBy">
+                        <option value="newest">最新上传</option>
+                        <option value="oldest">最早上传</option>
+                        <option value="name">按名称排序</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 资料统计 -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ materials|selectattr('file_type', 'equalto', 'pdf')|list|length }}</h5>
+                            <p class="card-text">PDF文档</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ materials|selectattr('file_type', 'equalto', 'video')|list|length }}</h5>
+                            <p class="card-text">视频资料</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">{{ materials|selectattr('file_type', 'equalto', 'audio')|list|length }}</h5>
+                            <p class="card-text">音频资料</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">{{ materials|length }}</h5>
+                            <p class="card-text">总资料数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 资料列表 -->
+            <div class="row" id="materialsContainer">
+                {% for material in materials %}
+                <div class="col-md-6 col-lg-4 mb-4 material-card" data-type="{{ material.file_type }}" data-class="{{ material.class_id }}">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                {% if material.file_type == 'pdf' %}
+                                    <i class="fas fa-file-pdf text-danger me-2"></i>
+                                {% elif material.file_type == 'video' %}
+                                    <i class="fas fa-play-circle text-primary me-2"></i>
+                                {% elif material.file_type == 'audio' %}
+                                    <i class="fas fa-volume-up text-success me-2"></i>
+                                {% else %}
+                                    <i class="fas fa-file text-secondary me-2"></i>
+                                {% endif %}
+                                <small class="text-muted">{{ material.file_type.upper() }}</small>
+                            </div>
+                            <small class="text-muted">{{ material.created_at.strftime('%m-%d') }}</small>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">{{ material.title }}</h6>
+                            <p class="card-text text-muted small">{{ material.description or '暂无描述' }}</p>
+                            <div class="mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-chalkboard-teacher"></i> {{ material.class.course.name }}
+                                </small>
+                            </div>
+                            <div class="mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> {{ material.uploaded_by.full_name or material.uploaded_by.username }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group w-100" role="group">
+                                {% if material.file_type == 'pdf' %}
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="previewPDF('{{ material.file_url }}', '{{ material.title }}')">
+                                        <i class="fas fa-eye"></i> 预览
+                                    </button>
+                                {% elif material.file_type == 'video' %}
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="playVideo('{{ material.file_url }}', '{{ material.title }}')">
+                                        <i class="fas fa-play"></i> 播放
+                                    </button>
+                                {% elif material.file_type == 'audio' %}
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="playAudio('{{ material.file_url }}', '{{ material.title }}')">
+                                        <i class="fas fa-play"></i> 播放
+                                    </button>
+                                {% endif %}
+                                <a href="{{ material.file_url }}" class="btn btn-outline-success btn-sm" download>
+                                    <i class="fas fa-download"></i> 下载
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- 如果没有资料 -->
+            {% if not materials %}
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">暂无学习资料</h5>
+                <p class="text-muted">请联系老师上传学习资料</p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</div>
+
+<!-- PDF预览模态框 -->
+<div class="modal fade" id="pdfModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pdfModalTitle">PDF预览</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="pdfViewer" src="" width="100%" height="600px"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 视频播放模态框 -->
+<div class="modal fade" id="videoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalTitle">视频播放</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <video id="videoPlayer" controls width="100%">
+                    <source src="" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 音频播放模态框 -->
+<div class="modal fade" id="audioModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="audioModalTitle">音频播放</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <audio id="audioPlayer" controls width="100%">
+                    <source src="" type="audio/mpeg">
+                    您的浏览器不支持音频播放。
+                </audio>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 搜索和筛选功能
+document.getElementById('searchInput').addEventListener('input', filterMaterials);
+document.getElementById('courseFilter').addEventListener('change', filterMaterials);
+document.getElementById('sortBy').addEventListener('change', sortMaterials);
+
+function filterMaterials(type = null) {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const courseFilter = document.getElementById('courseFilter').value;
+    const cards = document.querySelectorAll('.material-card');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const description = card.querySelector('.card-text').textContent.toLowerCase();
+        const cardType = card.dataset.type;
+        const cardClass = card.dataset.class;
+        
+        const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+        const matchesType = !type || type === 'all' || cardType === type;
+        const matchesCourse = !courseFilter || cardClass === courseFilter;
+        
+        if (matchesSearch && matchesType && matchesCourse) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // 更新按钮状态
+    if (type && type !== 'all') {
+        document.querySelectorAll('.btn-group button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+}
+
+function sortMaterials() {
+    const sortBy = document.getElementById('sortBy').value;
+    const container = document.getElementById('materialsContainer');
+    const cards = Array.from(container.children);
+    
+    cards.sort((a, b) => {
+        if (sortBy === 'name') {
+            const titleA = a.querySelector('.card-title').textContent;
+            const titleB = b.querySelector('.card-title').textContent;
+            return titleA.localeCompare(titleB);
+        } else if (sortBy === 'oldest') {
+            const dateA = a.querySelector('.card-header small:last-child').textContent;
+            const dateB = b.querySelector('.card-header small:last-child').textContent;
+            return dateA.localeCompare(dateB);
+        } else { // newest
+            const dateA = a.querySelector('.card-header small:last-child').textContent;
+            const dateB = b.querySelector('.card-header small:last-child').textContent;
+            return dateB.localeCompare(dateA);
+        }
+    });
+    
+    cards.forEach(card => container.appendChild(card));
+}
+
+function previewPDF(url, title) {
+    document.getElementById('pdfModalTitle').textContent = title;
+    document.getElementById('pdfViewer').src = url;
+    new bootstrap.Modal(document.getElementById('pdfModal')).show();
+}
+
+function playVideo(url, title) {
+    document.getElementById('videoModalTitle').textContent = title;
+    document.getElementById('videoPlayer').src = url;
+    new bootstrap.Modal(document.getElementById('videoModal')).show();
+}
+
+function playAudio(url, title) {
+    document.getElementById('audioModalTitle').textContent = title;
+    document.getElementById('audioPlayer').src = url;
+    new bootstrap.Modal(document.getElementById('audioModal')).show();
+}
+
+// 模态框关闭时停止播放
+document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById('videoPlayer').pause();
+});
+
+document.getElementById('audioModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById('audioPlayer').pause();
+});
+</script>
+{% endblock %}

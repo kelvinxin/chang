@@ -1,0 +1,431 @@
+/* 中文课程页面 - 现代简约风格 */
+
+/* 页面头部 */
+.hero-section-simple {
+    background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
+    padding: var(--spacing-2xl) 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.min-vh-50 {
+    min-height: 50vh;
+}
+
+.hero-title-simple {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero-subtitle-simple {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 筛选区域 */
+.filter-section-modern {
+    background: var(--white);
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.filter-buttons-modern {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.filter-btn-modern {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--gray-200);
+    background: var(--white);
+    color: var(--text-secondary);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn-modern:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn-modern.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+.form-control-modern {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    background: var(--white);
+    color: var(--text-primary);
+    font-weight: 500;
+    width: auto;
+    min-width: 150px;
+}
+
+.form-control-modern:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* 课程列表 */
+.courses-section-modern {
+    padding: var(--spacing-2xl) 0;
+    background: var(--gray-50);
+}
+
+.course-card-modern {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.course-card-modern:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color);
+}
+
+.course-header-modern {
+    background: var(--gray-50);
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.course-level-modern {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.course-level-modern.hsk1 {
+    background: var(--primary-color);
+}
+
+.course-level-modern.hsk2 {
+    background: #10b981;
+}
+
+.course-level-modern.hsk3 {
+    background: #f59e0b;
+}
+
+.course-level-modern.oral {
+    background: #8b5cf6;
+}
+
+.course-level-modern.business {
+    background: #ef4444;
+}
+
+.course-icon-modern {
+    width: 80px;
+    height: 80px;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.course-card-modern:hover .course-icon-modern {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.course-content-modern {
+    padding: var(--spacing-xl);
+}
+
+.course-title-modern {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.course-description-modern {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.course-features-modern {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.feature-item i {
+    color: var(--primary-color);
+    font-size: 1.125rem;
+}
+
+.feature-item span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.course-footer-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-price-modern {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.price-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price-period {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.btn-modern-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-modern-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* 学员评价 - 简化版 */
+.testimonials-simple {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+}
+
+.testimonial-card-simple {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card-simple:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-avatar-simple {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 auto var(--spacing-md);
+}
+
+.testimonial-name {
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-role {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-rating-simple {
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-rating-simple .fas {
+    color: #fbbf24;
+    font-size: 1rem;
+    margin: 0 0.125rem;
+}
+
+.testimonial-text-simple {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* 教师团队 - 简化版 */
+.teachers-simple {
+    padding: var(--spacing-2xl) 0;
+    background: var(--gray-50);
+}
+
+.teacher-card-simple {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.teacher-card-simple:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.teacher-avatar-simple {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    margin: 0 auto var(--spacing-md);
+}
+
+.teacher-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.25rem;
+}
+
+.teacher-title {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.teacher-experience {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero-title-simple {
+        font-size: 2.5rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .filter-buttons-modern {
+        justify-content: center;
+    }
+    
+    .course-features-modern {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .course-footer-modern {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title-simple {
+        font-size: 2rem;
+    }
+    
+    .filter-btn-modern {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .course-card-modern {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .course-header-modern,
+    .course-content-modern {
+        padding: var(--spacing-lg);
+    }
+}

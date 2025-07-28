@@ -1,0 +1,80 @@
+/* 页脚样式优化 */
+footer {
+    background-color: #212529;
+}
+
+/* 修复页脚文字昏暗问题 */
+footer .text-muted {
+    color: #d0d0d0 !important;
+    opacity: 0.9;
+}
+
+/* 社交媒体图标效果 */
+footer .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+footer .social-icon:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 页脚链接悬停效果 */
+footer .hover-primary {
+    transition: all 0.3s ease;
+}
+
+footer .hover-primary:hover {
+    color: #ffffff !important;
+    text-decoration: none;
+    transform: translateX(3px);
+}
+
+/* 页脚联系信息图标 */
+footer .fas, 
+footer .fab {
+    transition: all 0.3s ease;
+}
+
+footer a:hover .fas,
+footer a:hover .fab {
+    transform: scale(1.2);
+}
+
+/* 页脚按钮效果 */
+footer .btn {
+    transition: all 0.3s ease;
+}
+
+footer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 页脚标题加强 */
+footer h5, 
+footer h6 {
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+footer h5:after,
+footer h6:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+}

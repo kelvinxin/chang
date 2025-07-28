@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}管理员控制面板 - 启梦教育{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 p-0">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h6 class="sidebar-title">管理员系统</h6>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('admin_dashboard') }}">
+                                <i class="fas fa-tachometer-alt"></i>控制面板
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="alert('功能开发中')">
+                                <i class="fas fa-users"></i>用户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="alert('功能开发中')">
+                                <i class="fas fa-book"></i>课程管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="alert('功能开发中')">
+                                <i class="fas fa-chart-bar"></i>数据统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="alert('功能开发中')">
+                                <i class="fas fa-cog"></i>系统设置
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-md-9 col-lg-10">
+            <div class="dashboard-header">
+                <div class="container-fluid">
+                    <h1 class="dashboard-title">管理员控制面板</h1>
+                    <p class="dashboard-subtitle">系统概览与管理功能</p>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <!-- 统计卡片 -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card">
+                            <div class="stats-number">{{ total_students }}</div>
+                            <div class="stats-label">注册学生</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, var(--success-color), #059669);">
+                            <div class="stats-number">{{ total_teachers }}</div>
+                            <div class="stats-label">在职教师</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, var(--warning-color), #d97706);">
+                            <div class="stats-number">{{ total_courses }}</div>
+                            <div class="stats-label">课程总数</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card stats-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                            <div class="stats-number">{{ active_courses }}</div>
+                            <div class="stats-label">活跃课程</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- 系统概览 -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>系统使用情况
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="usageChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 最近活动 -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-history me-2"></i>最近活动
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <div class="feature-icon me-3" style="width: 40px; height: 40px; font-size: 16px; background-color: var(--success-color);">
+                                                <i class="fas fa-user-plus"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">新用户注册</h6>
+                                                <small class="text-muted">学生 Nguyen Van A 注册成功</small>
+                                            </div>
+                                            <small class="text-muted">2分钟前</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <div class="feature-icon me-3" style="width: 40px; height: 40px; font-size: 16px; background-color: var(--primary-color);">
+                                                <i class="fas fa-book"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">课程更新</h6>
+                                                <small class="text-muted">HSK1基础班 添加了新的学习资料</small>
+                                            </div>
+                                            <small class="text-muted">15分钟前</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <div class="feature-icon me-3" style="width: 40px; height: 40px; font-size: 16px; background-color: var(--warning-color);">
+                                                <i class="fas fa-calendar-check"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">请假审批</h6>
+                                                <small class="text-muted">李老师审批了3个请假申请</small>
+                                            </div>
+                                            <small class="text-muted">1小时前</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 快速操作 -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-bolt me-2"></i>快速操作
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-3">
+                                    <button class="btn btn-primary" onclick="alert('功能开发中')">
+                                        <i class="fas fa-user-plus me-2"></i>添加用户
+                                    </button>
+                                    <button class="btn btn-outline" onclick="alert('功能开发中')">
+                                        <i class="fas fa-book-plus me-2"></i>创建课程
+                                    </button>
+                                    <button class="btn btn-outline" onclick="alert('功能开发中')">
+                                        <i class="fas fa-file-export me-2"></i>导出数据
+                                    </button>
+                                    <button class="btn btn-outline" onclick="alert('功能开发中')">
+                                        <i class="fas fa-cog me-2"></i>系统设置
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 系统状态 -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-server me-2"></i>系统状态
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>服务器负载</small>
+                                        <small>45%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>内存使用</small>
+                                        <small>62%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 62%; background-color: var(--warning-color);"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small>存储空间</small>
+                                        <small>38%</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 38%; background-color: var(--success-color);"></div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <span class="badge badge-success">系统运行正常</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 待办事项 -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-tasks me-2"></i>待办事项
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        <div>
+                                            <small class="text-muted">审核新教师申请</small>
+                                        </div>
+                                        <span class="badge badge-warning">3</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        <div>
+                                            <small class="text-muted">处理用户反馈</small>
+                                        </div>
+                                        <span class="badge badge-primary">5</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        <div>
+                                            <small class="text-muted">系统维护计划</small>
+                                        </div>
+                                        <span class="badge badge-secondary">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 页面加载动画
+document.addEventListener('DOMContentLoaded', function() {
+    // 统计数字动画
+    const statsNumbers = document.querySelectorAll('.stats-number');
+    statsNumbers.forEach(stat => {
+        const finalValue = parseInt(stat.textContent);
+        if (!isNaN(finalValue)) {
+            let currentValue = 0;
+            const increment = finalValue / 30;
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    stat.textContent = finalValue;
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = Math.floor(currentValue);
+                }
+            }, 50);
+        }
+    });
+
+    // 使用情况图表
+    const ctx = document.getElementById('usageChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+            datasets: [{
+                label: '学生注册数',
+                data: [12, 19, 15, 25, 22, 30],
+                borderColor: 'rgb(0, 86, 211)',
+                backgroundColor: 'rgba(0, 86, 211, 0.1)',
+                tension: 0.4
+            }, {
+                label: '课程完成数',
+                data: [8, 15, 12, 20, 18, 25],
+                borderColor: 'rgb(16, 185, 129)',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

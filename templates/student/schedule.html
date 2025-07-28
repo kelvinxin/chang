@@ -1,0 +1,394 @@
+{% extends "base.html" %}
+
+{% block title %}课程表 - 学生系统{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading">学生系统</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_dashboard') }}">
+                            <i class="fas fa-tachometer-alt"></i> 控制面板
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('student_schedule') }}">
+                            <i class="fas fa-calendar"></i> 课程表
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_materials') }}">
+                            <i class="fas fa-book"></i> 学习资料
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_leave_request') }}">
+                            <i class="fas fa-calendar-times"></i> 请假申请
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_speech_practice') }}">
+                            <i class="fas fa-microphone"></i> AI口语练习
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_profile') }}">
+                            <i class="fas fa-user"></i> 个人资料
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">我的课程表</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="todayBtn">今天</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" id="weekBtn">本周</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" id="monthBtn">本月</button>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="exportSchedule()">
+                        <i class="fas fa-download"></i> 导出课表
+                    </button>
+                </div>
+            </div>
+
+            <!-- 当前时间和下节课提醒 -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-clock text-primary"></i> 当前时间
+                            </h6>
+                            <h4 id="currentTime" class="text-primary"></h4>
+                            <p class="text-muted mb-0" id="currentDate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-bell text-warning"></i> 下节课提醒
+                            </h6>
+                            {% if next_class %}
+                            <h5 class="text-warning">{{ next_class.course.name }}</h5>
+                            <p class="text-muted mb-0">
+                                {{ next_class.start_time.strftime('%m月%d日 %H:%M') }} - {{ next_class.end_time.strftime('%H:%M') }}
+                            </p>
+                            {% else %}
+                            <p class="text-muted mb-0">今天没有更多课程</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 课程表日历 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">课程安排</h6>
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="prevBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span id="currentPeriod" class="mx-3 fw-bold"></span>
+                            <button type="button" class="btn btn-sm btn-outline-secondary ms-2" id="nextBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+
+            <!-- 今日课程详情 -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">今日课程详情</h6>
+                </div>
+                <div class="card-body">
+                    {% if today_classes %}
+                    <div class="row">
+                        {% for class in today_classes %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-start border-primary border-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="card-title">{{ class.course.name }}</h6>
+                                            <p class="card-text text-muted">{{ class.class.name }}</p>
+                                            <p class="card-text">
+                                                <i class="fas fa-clock"></i> 
+                                                {{ class.start_time if class.start_time else '08:00' }} - {{ class.end_time if class.end_time else '09:30' }}
+                                            </p>
+                                            <p class="card-text">
+                                                <i class="fas fa-user"></i> 
+                                                {{ class.class.teacher.full_name or class.class.teacher.username }}
+                                            </p>
+                                            <p class="card-text">
+                                                <i class="fas fa-map-marker-alt"></i> 
+                                                {{ class.room or '在线课程' }}
+                                            </p>
+                                        </div>
+                                        <div class="text-end">
+                                            {% if class.room and class.room.startswith('http') %}
+                                                <a href="{{ class.room }}" target="_blank" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-video"></i> 进入课堂
+                                                </a>
+                                            {% endif %}
+                                            <button type="button" class="btn btn-outline-warning btn-sm mt-1" 
+                                                    onclick="requestLeave('{{ class.id }}')">
+                                                <i class="fas fa-calendar-times"></i> 请假
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-calendar-day fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">今天没有课程安排</h5>
+                        <p class="text-muted">好好休息，为明天的学习做准备！</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- 本周课程统计 -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">本周学习统计</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <h4 class="text-primary">{{ week_stats.total_classes }}</h4>
+                            <small class="text-muted">总课程数</small>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-success">{{ week_stats.attended_classes }}</h4>
+                            <small class="text-muted">已上课程</small>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-warning">{{ week_stats.upcoming_classes }}</h4>
+                            <small class="text-muted">待上课程</small>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-info">{{ week_stats.study_hours }}h</h4>
+                            <small class="text-muted">学习时长</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- 请假申请模态框 -->
+<div class="modal fade" id="leaveModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">请假申请</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="leaveForm">
+                    <input type="hidden" id="scheduleId" name="schedule_id">
+                    <div class="mb-3">
+                        <label for="leaveReason" class="form-label">请假原因</label>
+                        <textarea class="form-control" id="leaveReason" name="reason" rows="3" required placeholder="请详细说明请假原因..."></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        请假申请提交后，需要等待老师审批。请提前申请以免影响学习进度。
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-warning" onclick="submitLeaveRequest()">提交申请</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 更新当前时间
+function updateCurrentTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('zh-CN', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+    });
+    const dateString = now.toLocaleDateString('zh-CN', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        weekday: 'long'
+    });
+    
+    document.getElementById('currentTime').textContent = timeString;
+    document.getElementById('currentDate').textContent = dateString;
+}
+
+// 每秒更新时间
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
+
+// 初始化日历
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        locale: 'zh-cn',
+        headerToolbar: {
+            left: '',
+            center: '',
+            right: ''
+        },
+        height: 'auto',
+        slotMinTime: '08:00:00',
+        slotMaxTime: '22:00:00',
+        allDaySlot: false,
+        events: [
+            {% for lesson in lessons %}
+            {
+                title: '{{ lesson.title }}',
+                start: '{{ lesson.lesson_date.strftime("%Y-%m-%dT%H:%M:%S") if lesson.lesson_date else "2025-01-01T08:00:00" }}',
+                end: '{{ "2025-01-01T09:30:00" }}',
+                backgroundColor: '{{ lesson.course.level | course_color }}',
+                borderColor: '{{ lesson.course.level | course_color }}',
+                extendedProps: {
+                    teacher: '{{ lesson.course.teacher.full_name }}',
+                    room: '{{ lesson.classroom or "在线课程" }}',
+                    className: '{{ lesson.course.name }}'
+                }
+            },
+            {% endfor %}
+        ],
+        eventClick: function(info) {
+            alert('课程：' + info.event.title + '\n' +
+                  '教师：' + info.event.extendedProps.teacher + '\n' +
+                  '地点：' + info.event.extendedProps.room + '\n' +
+                  '时间：' + info.event.start.toLocaleString());
+        }
+    });
+    
+    calendar.render();
+    
+    // 视图切换按钮
+    document.getElementById('todayBtn').addEventListener('click', function() {
+        calendar.today();
+        updateActiveButton(this);
+    });
+    
+    document.getElementById('weekBtn').addEventListener('click', function() {
+        calendar.changeView('timeGridWeek');
+        updateActiveButton(this);
+    });
+    
+    document.getElementById('monthBtn').addEventListener('click', function() {
+        calendar.changeView('dayGridMonth');
+        updateActiveButton(this);
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', function() {
+        calendar.prev();
+        updatePeriodDisplay();
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', function() {
+        calendar.next();
+        updatePeriodDisplay();
+    });
+    
+    function updateActiveButton(activeBtn) {
+        document.querySelectorAll('.btn-group .btn').forEach(btn => {
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline-secondary');
+        });
+        activeBtn.classList.remove('btn-outline-secondary');
+        activeBtn.classList.add('btn-outline-primary');
+    }
+    
+    function updatePeriodDisplay() {
+        const view = calendar.view;
+        const start = view.currentStart;
+        const end = view.currentEnd;
+        
+        let periodText = '';
+        if (view.type === 'timeGridWeek') {
+            periodText = start.toLocaleDateString('zh-CN') + ' - ' + 
+                        new Date(end.getTime() - 86400000).toLocaleDateString('zh-CN');
+        } else if (view.type === 'dayGridMonth') {
+            periodText = start.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long' });
+        }
+        
+        document.getElementById('currentPeriod').textContent = periodText;
+    }
+    
+    updatePeriodDisplay();
+});
+
+function requestLeave(scheduleId) {
+    document.getElementById('scheduleId').value = scheduleId;
+    new bootstrap.Modal(document.getElementById('leaveModal')).show();
+}
+
+function submitLeaveRequest() {
+    const form = document.getElementById('leaveForm');
+    const formData = new FormData(form);
+    
+    fetch('/api/leave-requests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('请假申请提交成功！请等待老师审批。');
+            bootstrap.Modal.getInstance(document.getElementById('leaveModal')).hide();
+            form.reset();
+        } else {
+            alert('提交失败：' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('提交失败，请重试');
+    });
+}
+
+function exportSchedule() {
+    // 导出课表功能
+    window.open('/api/schedule/export?format=pdf', '_blank');
+}
+</script>
+
+<!-- FullCalendar CSS -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+<!-- FullCalendar JS -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/locales/zh-cn.js'></script>
+{% endblock %}

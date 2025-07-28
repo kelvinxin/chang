@@ -1,0 +1,627 @@
+{% extends "base.html" %}
+
+{% block title %}留学服务 - 启梦教育{% endblock %}
+
+{% block content %}
+<!-- 页面头部 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-3">留学中国服务</h1>
+            <p class="lead text-muted">专业的留学咨询，全程的申请指导，助您实现中国留学梦想</p>
+        </div>
+    </div>
+</section>
+
+<!-- 服务概览 -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">院校申请</h5>
+                    <p class="text-muted">专业的院校选择指导，个性化申请方案制定</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(0, 200, 81, 0.1); color: #00c851;">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">奖学金申请</h5>
+                    <p class="text-muted">丰富的奖学金资源，专业的申请指导</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(255, 136, 0, 0.1); color: #ff8800;">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">签证辅导</h5>
+                    <p class="text-muted">签证材料准备，面试培训，提高通过率</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">全程服务</h5>
+                    <p class="text-muted">从申请到入学，提供全程专业服务</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 合作院校Logo墙 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">合作院校</h2>
+            <p class="lead text-muted">与中国顶尖大学建立合作关系，为您提供更多选择</p>
+        </div>
+        
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-graduation-cap"></i>
+                        <small>北京大学</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-university"></i>
+                        <small>清华大学</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-school"></i>
+                        <small>复旦大学</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-building"></i>
+                        <small>上海交大</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-landmark"></i>
+                        <small>中山大学</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4">
+                <div class="university-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-globe"></i>
+                        <small>华中科大</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <p class="text-muted">还有更多合作院校...</p>
+        </div>
+    </div>
+</section>
+
+<!-- 成功案例展示区 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">成功案例</h2>
+            <p class="lead text-muted">真实的成功故事，见证我们的专业服务</p>
+        </div>
+        
+        <!-- 案例筛选 -->
+        <div class="text-center mb-4">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary active" data-filter="all">全部案例</button>
+                <button type="button" class="btn btn-outline" data-filter="undergraduate">本科</button>
+                <button type="button" class="btn btn-outline" data-filter="graduate">硕士</button>
+                <button type="button" class="btn btn-outline" data-filter="phd">博士</button>
+                <button type="button" class="btn btn-outline" data-filter="scholarship">奖学金</button>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- 案例1 -->
+            <div class="col-lg-6" data-category="graduate scholarship">
+                <div class="card case-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">Nguyen Van A</h5>
+                                <small class="text-muted">越南 · 河内</small>
+                            </div>
+                            <span class="badge badge-success">成功录取</span>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">申请前背景</h6>
+                                <p class="mb-1"><strong>学历：</strong>本科</p>
+                                <p class="mb-1"><strong>专业：</strong>经济学</p>
+                                <p class="mb-1"><strong>GPA：</strong>3.2/4.0</p>
+                                <p class="mb-1"><strong>中文水平：</strong>HSK4</p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-success mb-1">录取结果</h6>
+                                <p class="mb-1"><strong>院校：</strong>北京大学</p>
+                                <p class="mb-1"><strong>专业：</strong>国际经济</p>
+                                <p class="mb-1"><strong>学位：</strong>硕士</p>
+                                <p class="mb-1"><strong>奖学金：</strong>全额奖学金</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-quote-left me-2"></i>学员感言
+                            </h6>
+                            <p class="text-muted mb-0">"感谢启梦教育的专业指导，从选校到申请材料准备，每个环节都非常细致。最终获得北大全额奖学金，实现了我的留学梦想！"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例2 -->
+            <div class="col-lg-6" data-category="undergraduate">
+                <div class="card case-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">John Smith</h5>
+                                <small class="text-muted">美国 · 纽约</small>
+                            </div>
+                            <span class="badge badge-success">成功录取</span>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">申请前背景</h6>
+                                <p class="mb-1"><strong>学历：</strong>高中</p>
+                                <p class="mb-1"><strong>GPA：</strong>3.8/4.0</p>
+                                <p class="mb-1"><strong>SAT：</strong>1450</p>
+                                <p class="mb-1"><strong>中文水平：</strong>HSK5</p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-success mb-1">录取结果</h6>
+                                <p class="mb-1"><strong>院校：</strong>清华大学</p>
+                                <p class="mb-1"><strong>专业：</strong>计算机科学</p>
+                                <p class="mb-1"><strong>学位：</strong>本科</p>
+                                <p class="mb-1"><strong>奖学金：</strong>部分奖学金</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-quote-left me-2"></i>学员感言
+                            </h6>
+                            <p class="text-muted mb-0">"启梦教育的老师非常专业，帮我制定了详细的申请计划。现在我在清华大学学习计算机科学，感谢他们的帮助！"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例3 -->
+            <div class="col-lg-6" data-category="phd scholarship">
+                <div class="card case-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">Maria Garcia</h5>
+                                <small class="text-muted">西班牙 · 马德里</small>
+                            </div>
+                            <span class="badge badge-success">成功录取</span>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">申请前背景</h6>
+                                <p class="mb-1"><strong>学历：</strong>硕士</p>
+                                <p class="mb-1"><strong>专业：</strong>文学</p>
+                                <p class="mb-1"><strong>GPA：</strong>3.7/4.0</p>
+                                <p class="mb-1"><strong>中文水平：</strong>HSK6</p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-success mb-1">录取结果</h6>
+                                <p class="mb-1"><strong>院校：</strong>复旦大学</p>
+                                <p class="mb-1"><strong>专业：</strong>中国文学</p>
+                                <p class="mb-1"><strong>学位：</strong>博士</p>
+                                <p class="mb-1"><strong>奖学金：</strong>全额奖学金</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-quote-left me-2"></i>学员感言
+                            </h6>
+                            <p class="text-muted mb-0">"博士申请竞争激烈，但启梦教育的专业团队帮我准备了完美的研究计划。现在我在复旦大学攻读中国文学博士学位。"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例4 -->
+            <div class="col-lg-6" data-category="graduate">
+                <div class="card case-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">Tran Van B</h5>
+                                <small class="text-muted">越南 · 胡志明市</small>
+                            </div>
+                            <span class="badge badge-success">成功录取</span>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h6 class="text-muted mb-1">申请前背景</h6>
+                                <p class="mb-1"><strong>学历：</strong>本科</p>
+                                <p class="mb-1"><strong>专业：</strong>工程学</p>
+                                <p class="mb-1"><strong>GPA：</strong>3.5/4.0</p>
+                                <p class="mb-1"><strong>中文水平：</strong>HSK4</p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-success mb-1">录取结果</h6>
+                                <p class="mb-1"><strong>院校：</strong>上海交大</p>
+                                <p class="mb-1"><strong>专业：</strong>机械工程</p>
+                                <p class="mb-1"><strong>学位：</strong>硕士</p>
+                                <p class="mb-1"><strong>奖学金：</strong>部分奖学金</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-quote-left me-2"></i>学员感言
+                            </h6>
+                            <p class="text-muted mb-0">"虽然我的中文水平不高，但启梦教育帮我制定了语言提升计划，最终成功申请到上海交大的机械工程硕士项目。"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <button class="btn btn-outline btn-lg" onclick="loadMoreCases()">
+                <i class="fas fa-plus me-2"></i>查看更多案例
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- 申请流程 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">申请流程</h2>
+            <p class="lead text-muted">专业的申请流程，确保每个环节都精准到位</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h5 class="fw-bold mt-3 mb-2">咨询评估</h5>
+                        <p class="text-muted">专业顾问一对一咨询，评估申请条件，制定个性化方案</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h5 class="fw-bold mt-3 mb-2">选校定位</h5>
+                        <p class="text-muted">根据专业背景和兴趣，精准选择合适的院校和专业</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h5 class="fw-bold mt-3 mb-2">材料准备</h5>
+                        <p class="text-muted">指导准备申请材料，包括文书写作、推荐信等</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h5 class="fw-bold mt-3 mb-2">申请提交</h5>
+                        <p class="text-muted">协助完成申请提交，跟踪申请进度，直到录取</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 专业团队 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">专业顾问团队</h2>
+            <p class="lead text-muted">经验丰富的留学顾问，为您提供专业的申请指导</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-user text-white" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">陈顾问</h5>
+                        <p class="text-muted mb-2">资深留学顾问</p>
+                        <small class="text-muted">8年留学咨询经验，专注理工科申请</small>
+                        <div class="mt-3">
+                            <span class="badge badge-primary me-1">理工科</span>
+                            <span class="badge badge-primary me-1">奖学金</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="rounded-circle bg-success d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-user text-white" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">刘顾问</h5>
+                        <p class="text-muted mb-2">文科申请专家</p>
+                        <small class="text-muted">10年留学咨询经验，擅长文科类申请</small>
+                        <div class="mt-3">
+                            <span class="badge badge-success me-1">文科</span>
+                            <span class="badge badge-success me-1">博士申请</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-user text-white" style="font-size: 2rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">张顾问</h5>
+                        <p class="text-muted mb-2">商科申请专家</p>
+                        <small class="text-muted">6年留学咨询经验，专注商科MBA申请</small>
+                        <div class="mt-3">
+                            <span class="badge badge-warning me-1">商科</span>
+                            <span class="badge badge-warning me-1">MBA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 立即咨询 -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-3">开始您的留学申请之旅</h2>
+                <p class="lead mb-0">专业的团队，丰富的经验，个性化的服务，助您实现留学梦想</p>
+            </div>
+            <div class="col-lg-4 text-end">
+                <button class="btn btn-light btn-lg me-3" data-bs-toggle="modal" data-bs-target="#consultModal">
+                    <i class="fas fa-phone me-2"></i>立即咨询
+                </button>
+                <button class="btn btn-outline-light btn-lg" onclick="alert('功能开发中')">
+                    <i class="fas fa-download me-2"></i>下载手册
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 咨询模态框 -->
+<div class="modal fade" id="consultModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">留学咨询</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="consultForm">
+                    <div class="form-group">
+                        <label class="form-label">姓名</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">联系方式</label>
+                        <input type="text" class="form-control" name="contact" placeholder="手机号或邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">意向学位</label>
+                        <select class="form-control" name="degree" required>
+                            <option value="">请选择</option>
+                            <option value="本科">本科</option>
+                            <option value="硕士">硕士</option>
+                            <option value="博士">博士</option>
+                            <option value="语言生">语言生</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">意向专业</label>
+                        <input type="text" class="form-control" name="major" placeholder="如：计算机科学、经济学等">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">当前学历</label>
+                        <input type="text" class="form-control" name="education" placeholder="如：本科在读、已毕业等">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">中文水平</label>
+                        <select class="form-control" name="chinese_level">
+                            <option value="">请选择</option>
+                            <option value="零基础">零基础</option>
+                            <option value="HSK1">HSK1</option>
+                            <option value="HSK2">HSK2</option>
+                            <option value="HSK3">HSK3</option>
+                            <option value="HSK4">HSK4</option>
+                            <option value="HSK5">HSK5</option>
+                            <option value="HSK6">HSK6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">其他需求</label>
+                        <textarea class="form-control" name="requirements" rows="3" placeholder="请描述您的具体需求或问题"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitConsult()">提交咨询</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.university-logo {
+    text-align: center;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.university-logo:hover {
+    transform: translateY(-5px);
+}
+
+.logo-placeholder {
+    background: var(--bg-white);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.logo-placeholder:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.logo-placeholder i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.logo-placeholder small {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.case-card {
+    transition: all 0.3s ease;
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.process-step {
+    position: relative;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 案例筛选功能
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const caseCards = document.querySelectorAll('[data-category]');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // 更新按钮状态
+            filterButtons.forEach(btn => btn.classList.remove('btn-primary', 'active'));
+            filterButtons.forEach(btn => btn.classList.add('btn-outline'));
+            this.classList.remove('btn-outline');
+            this.classList.add('btn-primary', 'active');
+            
+            // 筛选案例
+            caseCards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(' ');
+                if (filter === 'all' || categories.includes(filter)) {
+                    card.style.display = 'block';
+                    card.classList.add('fade-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+// 加载更多案例
+function loadMoreCases() {
+    alert('更多案例正在准备中，敬请期待！');
+}
+
+// 提交咨询
+function submitConsult() {
+    const form = document.getElementById('consultForm');
+    const formData = new FormData(form);
+    
+    // 简单验证
+    if (!formData.get('name') || !formData.get('contact') || !formData.get('degree')) {
+        alert('请填写必填信息');
+        return;
+    }
+    
+    // 这里可以添加实际的提交逻辑
+    alert('感谢您的咨询！我们的顾问会在24小时内与您联系。');
+    bootstrap.Modal.getInstance(document.getElementById('consultModal')).hide();
+    form.reset();
+}
+</script>
+{% endblock %}

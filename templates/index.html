@@ -1,0 +1,469 @@
+{% extends "base.html" %}
+
+{% block title %}启梦教育 - 专业中文教学平台{% endblock %}
+
+{% block content %}
+<!-- 英雄轮播区域 -->
+<section class="hero-carousel">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        
+        <div class="carousel-inner">
+            <!-- 中文教学 -->
+            <div class="carousel-item active">
+                <div class="carousel-content">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold mb-4">掌握中文，连接未来</h1>
+                                <p class="lead mb-4">专业HSK课程体系，AI智能口语练习，让中文学习更高效</p>
+                                <div class="d-flex gap-3">
+                                    <a href="{{ url_for('chinese_courses') }}" class="btn btn-light btn-lg">
+                                        <i class="fas fa-book me-2"></i>探索课程
+                                    </a>
+                                    <a href="{{ url_for('student_speech_practice') }}" class="btn btn-outline-light btn-lg">
+                                        <i class="fas fa-microphone me-2"></i>AI口语练习
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <i class="fas fa-graduation-cap" style="font-size: 8rem; opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 留学服务 -->
+            <div class="carousel-item">
+                <div class="carousel-content" style="background: linear-gradient(135deg, #00c851, #00a142);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold mb-4">留学中国，成就梦想</h1>
+                                <p class="lead mb-4">专业留学咨询，奖学金申请，助您踏上中国求学之路</p>
+                                <div class="d-flex gap-3">
+                                    <a href="{{ url_for('study_abroad') }}" class="btn btn-light btn-lg">
+                                        <i class="fas fa-university me-2"></i>了解服务
+                                    </a>
+                                    <a href="{{ url_for('study_abroad_cases') }}" class="btn btn-outline-light btn-lg">
+                                        <i class="fas fa-star me-2"></i>成功案例
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <i class="fas fa-globe-asia" style="font-size: 8rem; opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 研学旅行 -->
+            <div class="carousel-item">
+                <div class="carousel-content" style="background: linear-gradient(135deg, #ff8800, #e67700);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold mb-4">研学中国，开拓视野</h1>
+                                <p class="lead mb-4">名校探访，文化体验，科技营地，让学习更有趣</p>
+                                <div class="d-flex gap-3">
+                                    <a href="{{ url_for('camp') }}" class="btn btn-light btn-lg">
+                                        <i class="fas fa-map-marked-alt me-2"></i>查看项目
+                                    </a>
+                                    <a href="#contact" class="btn btn-outline-light btn-lg">
+                                        <i class="fas fa-phone me-2"></i>立即咨询
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <i class="fas fa-mountain" style="font-size: 8rem; opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<!-- 三大核心服务 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">我们的核心服务</h2>
+            <p class="lead text-muted">专业、高效、贴心的教育服务</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- 中文教学 -->
+            <div class="col-lg-4">
+                <div class="card feature-card h-100">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>中文教学</h3>
+                    <p class="mb-4">HSK 1-6级系统课程，专业师资团队，AI智能口语练习，让中文学习更轻松高效</p>
+                    <div class="mt-auto">
+                        <a href="{{ url_for('chinese_courses') }}" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>了解课程
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 留学服务 -->
+            <div class="col-lg-4">
+                <div class="card feature-card h-100">
+                    <div class="feature-icon" style="background-color: rgba(0, 200, 81, 0.1); color: #00c851;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>留学服务</h3>
+                    <p class="mb-4">院校申请指导，奖学金咨询，签证辅导，全程专业服务，助您实现留学梦想</p>
+                    <div class="mt-auto">
+                        <a href="{{ url_for('study_abroad') }}" class="btn btn-outline">
+                            <i class="fas fa-arrow-right me-2"></i>咨询服务
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 研学旅行 -->
+            <div class="col-lg-4">
+                <div class="card feature-card h-100">
+                    <div class="feature-icon" style="background-color: rgba(255, 136, 0, 0.1); color: #ff8800;">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3>研学旅行</h3>
+                    <p class="mb-4">名校探访，文化体验，科技营地，寓教于乐的学习方式，开拓国际视野</p>
+                    <div class="mt-auto">
+                        <a href="{{ url_for('camp') }}" class="btn btn-outline">
+                            <i class="fas fa-arrow-right me-2"></i>查看项目
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 数据统计 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card">
+                    <div class="stats-number">1000+</div>
+                    <div class="stats-label">学生</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card" style="background: linear-gradient(135deg, #00c851, #00a142);">
+                    <div class="stats-number">50+</div>
+                    <div class="stats-label">专业教师</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card" style="background: linear-gradient(135deg, #ff8800, #e67700);">
+                    <div class="stats-number">95%</div>
+                    <div class="stats-label">通过率</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                    <div class="stats-number">20+</div>
+                    <div class="stats-label">合作院校</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 为什么选择我们 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">为什么选择启梦教育</h2>
+            <p class="lead text-muted">专业、创新、贴心的教育服务</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">AI智能教学</h5>
+                    <p class="text-muted">先进的AI技术辅助口语练习，实时纠错，个性化学习</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(0, 200, 81, 0.1); color: #00c851;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">专业师资</h5>
+                    <p class="text-muted">经验丰富的中文教师团队，专业的教学方法</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(255, 136, 0, 0.1); color: #ff8800;">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">多语言支持</h5>
+                    <p class="text-muted">中文、英文、越南语三语切换，无障碍学习</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">权威认证</h5>
+                    <p class="text-muted">HSK官方认证课程，国际认可的中文水平证书</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 学员评价 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">学员评价</h2>
+            <p class="lead text-muted">听听学员们的真实反馈</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">N</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Nguyen Van A</h6>
+                                <small class="text-muted">越南学生</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"AI口语练习功能太棒了！能够实时纠正我的发音，让我的中文口语进步很快。老师们也很专业，课程安排合理。"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-success d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">J</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">John Smith</h6>
+                                <small class="text-muted">美国学生</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"通过启梦教育的留学服务，我成功申请到了北京大学的奖学金。专业的咨询团队给了我很大帮助！"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">M</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Maria Garcia</h6>
+                                <small class="text-muted">西班牙学生</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"研学旅行项目让我深度体验了中国文化，不仅提高了中文水平，还结交了很多朋友。非常推荐！"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 联系我们 -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold mb-4">开始您的中文学习之旅</h2>
+                <p class="lead mb-4">专业的教学团队，先进的学习技术，个性化的服务，让中文学习更高效</p>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-phone text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-0">电话咨询</h6>
+                                <small class="text-muted">+86 400-123-4567</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-envelope text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-0">邮箱联系</h6>
+                                <small class="text-muted">info@qimeng.edu</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fab fa-weixin text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-0">微信咨询</h6>
+                                <small class="text-muted">QimengEducation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-0">地址</h6>
+                                <small class="text-muted">北京市朝阳区</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>立即开始
+                    </a>
+                    <a href="#" class="btn btn-outline btn-lg" onclick="alert('功能开发中')">
+                        <i class="fas fa-calendar me-2"></i>预约试听
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-paper-plane me-2"></i>快速咨询
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label">姓名</label>
+                                <input type="text" class="form-control" placeholder="请输入您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">邮箱</label>
+                                <input type="email" class="form-control" placeholder="请输入您的邮箱">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">感兴趣的服务</label>
+                                <select class="form-control">
+                                    <option>中文教学</option>
+                                    <option>留学服务</option>
+                                    <option>研学旅行</option>
+                                    <option>其他咨询</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">留言</label>
+                                <textarea class="form-control" rows="3" placeholder="请描述您的需求"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-paper-plane me-2"></i>发送咨询
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 轮播图自动播放
+document.addEventListener('DOMContentLoaded', function() {
+    // 统计数字动画
+    const statsNumbers = document.querySelectorAll('.stats-number');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const stat = entry.target;
+                const finalValue = stat.textContent.replace(/[^\d]/g, '');
+                if (finalValue) {
+                    animateNumber(stat, parseInt(finalValue));
+                }
+            }
+        });
+    });
+    
+    statsNumbers.forEach(stat => observer.observe(stat));
+    
+    function animateNumber(element, finalValue) {
+        let currentValue = 0;
+        const increment = finalValue / 50;
+        const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= finalValue) {
+                element.textContent = finalValue + (element.textContent.includes('+') ? '+' : '') + 
+                                    (element.textContent.includes('%') ? '%' : '');
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(currentValue) + (element.textContent.includes('+') ? '+' : '') + 
+                                    (element.textContent.includes('%') ? '%' : '');
+            }
+        }, 30);
+    }
+    
+    // 表单提交
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('感谢您的咨询！我们会尽快与您联系。');
+    });
+});
+</script>
+{% endblock %}

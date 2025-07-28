@@ -1,0 +1,399 @@
+{% extends "base.html" %}
+
+{% block title %}AI口语练习 - 学生系统{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 p-0">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h6 class="sidebar-title">学生系统</h6>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_dashboard') }}">
+                                <i class="fas fa-tachometer-alt"></i>控制面板
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_schedule') }}">
+                                <i class="fas fa-calendar"></i>课程表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_materials') }}">
+                                <i class="fas fa-book"></i>学习资料
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_leave_request') }}">
+                                <i class="fas fa-calendar-times"></i>请假申请
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('student_speech_practice') }}">
+                                <i class="fas fa-microphone"></i>AI口语练习
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('student_profile') }}">
+                                <i class="fas fa-user"></i>个人资料
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-md-9 col-lg-10">
+            <div class="dashboard-header">
+                <div class="container-fluid">
+                    <h1 class="dashboard-title">AI口语练习</h1>
+                    <p class="dashboard-subtitle">智能语音识别，实时纠正发音，提升口语水平</p>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row g-4">
+                    <!-- 练习区域 -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-microphone me-2"></i>开始练习
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- 话题选择 -->
+                                <div class="mb-4">
+                                    <label class="form-label">选择练习话题</label>
+                                    <select class="form-control" id="topicSelect">
+                                        <option value="daily">日常对话</option>
+                                        <option value="hsk1">HSK1 - 自我介绍</option>
+                                        <option value="hsk2">HSK2 - 购物对话</option>
+                                        <option value="hsk3">HSK3 - 旅行经历</option>
+                                        <option value="business">商务中文</option>
+                                        <option value="culture">文化交流</option>
+                                    </select>
+                                </div>
+
+                                <!-- 练习内容 -->
+                                <div class="practice-area bg-light p-4 rounded mb-4">
+                                    <div id="practiceContent">
+                                        <h6 class="text-primary mb-3">练习内容：自我介绍</h6>
+                                        <p class="mb-3">请用中文介绍您自己，包括姓名、国籍、爱好等信息。</p>
+                                        <div class="alert alert-info">
+                                            <strong>参考句型：</strong><br>
+                                            • 我叫...，我是...人。<br>
+                                            • 我今年...岁。<br>
+                                            • 我喜欢...。<br>
+                                            • 我在...工作/学习。
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 录音控制 -->
+                                <div class="text-center mb-4">
+                                    <button id="recordBtn" class="btn btn-primary btn-lg me-3">
+                                        <i class="fas fa-microphone me-2"></i>开始录音
+                                    </button>
+                                    <button id="stopBtn" class="btn btn-secondary btn-lg me-3" disabled>
+                                        <i class="fas fa-stop me-2"></i>停止录音
+                                    </button>
+                                    <button id="playBtn" class="btn btn-outline btn-lg" disabled>
+                                        <i class="fas fa-play me-2"></i>播放录音
+                                    </button>
+                                </div>
+
+                                <!-- 录音状态 -->
+                                <div id="recordingStatus" class="text-center mb-4" style="display: none;">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="loading me-2"></div>
+                                        <span class="text-primary">正在录音中...</span>
+                                    </div>
+                                </div>
+
+                                <!-- AI评分结果 -->
+                                <div id="scoreResult" class="card border-primary" style="display: none;">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6 class="mb-0">
+                                            <i class="fas fa-chart-line me-2"></i>AI评分结果
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row text-center mb-3">
+                                            <div class="col-md-4">
+                                                <div class="feature-icon mx-auto mb-2" style="width: 60px; height: 60px;">
+                                                    <span id="totalScore" class="fw-bold">--</span>
+                                                </div>
+                                                <small class="text-muted">总分</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="feature-icon mx-auto mb-2" style="width: 60px; height: 60px; background-color: var(--success-color);">
+                                                    <span id="pronunciationScore" class="fw-bold">--</span>
+                                                </div>
+                                                <small class="text-muted">发音准确度</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="feature-icon mx-auto mb-2" style="width: 60px; height: 60px; background-color: var(--warning-color);">
+                                                    <span id="fluencyScore" class="fw-bold">--</span>
+                                                </div>
+                                                <small class="text-muted">流利度</small>
+                                            </div>
+                                        </div>
+                                        <div id="feedback" class="alert alert-info">
+                                            <strong>AI反馈：</strong><br>
+                                            <span id="feedbackText">等待评分...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 侧边信息 -->
+                    <div class="col-lg-4">
+                        <!-- 练习统计 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-chart-bar me-2"></i>练习统计
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="stats-number text-primary">{{ records|length }}</div>
+                                        <div class="stats-label">练习次数</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stats-number text-success">
+                                            {% if records %}
+                                                {{ (records|sum(attribute='score') / records|length)|round|int }}
+                                            {% else %}
+                                                0
+                                            {% endif %}
+                                        </div>
+                                        <div class="stats-label">平均分数</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 练习技巧 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-lightbulb me-2"></i>练习技巧
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        保持清晰的发音
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        控制语速，不要太快
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        注意声调的准确性
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        多练习常用词汇
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 最近练习记录 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-history me-2"></i>最近练习
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                {% if records %}
+                                    {% for record in records[:5] %}
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h6 class="mb-1">{{ record.topic }}</h6>
+                                            <small class="text-muted">{{ record.practice_date.strftime('%m月%d日 %H:%M') }}</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="badge badge-primary">{{ record.score }}分</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="text-center py-3">
+                                        <i class="fas fa-microphone text-muted" style="font-size: 2rem;"></i>
+                                        <p class="text-muted mt-2 mb-0">还没有练习记录</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let mediaRecorder;
+let audioChunks = [];
+let isRecording = false;
+
+// 练习话题内容
+const practiceTopics = {
+    daily: {
+        title: '日常对话',
+        content: '请用中文进行日常对话练习，比如问候、介绍等。',
+        examples: ['你好，很高兴认识你。', '今天天气怎么样？', '你喜欢什么运动？']
+    },
+    hsk1: {
+        title: 'HSK1 - 自我介绍',
+        content: '请用中文介绍您自己，包括姓名、国籍、爱好等信息。',
+        examples: ['我叫...，我是...人。', '我今年...岁。', '我喜欢...。']
+    },
+    hsk2: {
+        title: 'HSK2 - 购物对话',
+        content: '模拟购物场景，练习询问价格、购买物品等对话。',
+        examples: ['这个多少钱？', '我想买...。', '太贵了，便宜一点吧。']
+    },
+    hsk3: {
+        title: 'HSK3 - 旅行经历',
+        content: '描述一次旅行经历，包括地点、活动、感受等。',
+        examples: ['我去过...。', '那里很漂亮。', '我拍了很多照片。']
+    },
+    business: {
+        title: '商务中文',
+        content: '练习商务场合的中文表达，如会议、谈判等。',
+        examples: ['很高兴与您合作。', '我们来讨论一下细节。', '这个提案很不错。']
+    },
+    culture: {
+        title: '文化交流',
+        content: '介绍您的国家文化，或谈论中国文化。',
+        examples: ['我的国家有...传统。', '中国文化很有趣。', '我想了解更多。']
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const topicSelect = document.getElementById('topicSelect');
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const playBtn = document.getElementById('playBtn');
+    const recordingStatus = document.getElementById('recordingStatus');
+    const scoreResult = document.getElementById('scoreResult');
+
+    // 话题切换
+    topicSelect.addEventListener('change', function() {
+        const topic = practiceTopics[this.value];
+        const content = document.getElementById('practiceContent');
+        content.innerHTML = `
+            <h6 class="text-primary mb-3">练习内容：${topic.title}</h6>
+            <p class="mb-3">${topic.content}</p>
+            <div class="alert alert-info">
+                <strong>参考句型：</strong><br>
+                ${topic.examples.map(ex => `• ${ex}`).join('<br>')}
+            </div>
+        `;
+    });
+
+    // 开始录音
+    recordBtn.addEventListener('click', async function() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = function(event) {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = function() {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                playBtn.onclick = () => new Audio(audioUrl).play();
+                playBtn.disabled = false;
+                
+                // 模拟AI评分
+                evaluateSpeech();
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+            recordingStatus.style.display = 'block';
+            scoreResult.style.display = 'none';
+        } catch (error) {
+            alert('无法访问麦克风，请检查权限设置。');
+        }
+    });
+
+    // 停止录音
+    stopBtn.addEventListener('click', function() {
+        if (mediaRecorder && isRecording) {
+            mediaRecorder.stop();
+            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            isRecording = false;
+            
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+            recordingStatus.style.display = 'none';
+        }
+    });
+
+    // 模拟AI评分
+    function evaluateSpeech() {
+        const topic = topicSelect.value;
+        const text = practiceTopics[topic].examples.join(' ');
+        
+        // 显示加载状态
+        scoreResult.style.display = 'block';
+        document.getElementById('totalScore').textContent = '...';
+        document.getElementById('pronunciationScore').textContent = '...';
+        document.getElementById('fluencyScore').textContent = '...';
+        document.getElementById('feedbackText').textContent = '正在分析中...';
+
+        // 模拟API调用
+        setTimeout(() => {
+            fetch('/api/speech_evaluate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: text,
+                    topic: topic
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalScore').textContent = data.score;
+                document.getElementById('pronunciationScore').textContent = data.pronunciation_score;
+                document.getElementById('fluencyScore').textContent = data.fluency_score;
+                document.getElementById('feedbackText').textContent = data.feedback;
+            })
+            .catch(error => {
+                console.error('评分失败:', error);
+                document.getElementById('feedbackText').textContent = '评分失败，请重试。';
+            });
+        }, 2000);
+    }
+});
+</script>
+{% endblock %}

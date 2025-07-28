@@ -1,0 +1,741 @@
+{% extends "base.html" %}
+
+{% block title %}研学旅行 - 启梦教育{% endblock %}
+
+{% block content %}
+<!-- 页面头部 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-3">研学旅行项目</h1>
+            <p class="lead text-muted">探索中国文化，体验名校生活，开拓国际视野</p>
+        </div>
+    </div>
+</section>
+
+<!-- 项目特色 -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">名校探访</h5>
+                    <p class="text-muted">深入北大、清华等顶尖学府，感受学术氛围</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(0, 200, 81, 0.1); color: #00c851;">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">文化体验</h5>
+                    <p class="text-muted">书法、武术、茶艺等传统文化深度体验</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(255, 136, 0, 0.1); color: #ff8800;">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">科技探索</h5>
+                    <p class="text-muted">参观科技企业，了解中国创新发展</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card feature-card text-center h-100">
+                    <div class="feature-icon mx-auto" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">国际交流</h5>
+                    <p class="text-muted">与中国学生交流，建立国际友谊</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 热门项目 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">热门项目</h2>
+            <p class="lead text-muted">精心设计的研学项目，让学习更有趣</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- 北京名校探访营 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card camp-card h-100">
+                    <div class="camp-image">
+                        <div class="camp-badge">热门</div>
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="camp-title">北京名校探访营</h5>
+                        <p class="camp-description">深入北京大学、清华大学等顶尖学府，体验中国高等教育的魅力</p>
+                        
+                        <div class="camp-info mb-3">
+                            <div class="info-item">
+                                <i class="fas fa-calendar me-2"></i>
+                                <span>7天6夜</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users me-2"></i>
+                                <span>15-20人</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>北京</span>
+                            </div>
+                        </div>
+                        
+                        <div class="camp-highlights mb-3">
+                            <h6 class="fw-bold mb-2">项目亮点</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>北大清华校园深度游</li>
+                                <li><i class="fas fa-check text-success me-2"></i>与在校学生面对面交流</li>
+                                <li><i class="fas fa-check text-success me-2"></i>参观故宫、长城等名胜</li>
+                                <li><i class="fas fa-check text-success me-2"></i>中文课程强化训练</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="camp-price">
+                                <span class="h5 text-primary mb-0">¥8,800</span>
+                                <small class="text-muted">/人</small>
+                            </div>
+                            <button class="btn btn-primary" onclick="showCampDetail('beijing')">
+                                <i class="fas fa-info-circle me-1"></i>了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上海科技创新营 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card camp-card h-100">
+                    <div class="camp-image" style="background: linear-gradient(135deg, #00c851, #00a142);">
+                        <div class="camp-badge">推荐</div>
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="camp-title">上海科技创新营</h5>
+                        <p class="camp-description">探索中国科技前沿，参观知名科技企业，体验创新创业氛围</p>
+                        
+                        <div class="camp-info mb-3">
+                            <div class="info-item">
+                                <i class="fas fa-calendar me-2"></i>
+                                <span>5天4夜</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users me-2"></i>
+                                <span>12-18人</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>上海</span>
+                            </div>
+                        </div>
+                        
+                        <div class="camp-highlights mb-3">
+                            <h6 class="fw-bold mb-2">项目亮点</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>参观阿里巴巴、腾讯等企业</li>
+                                <li><i class="fas fa-check text-success me-2"></i>体验人工智能实验室</li>
+                                <li><i class="fas fa-check text-success me-2"></i>创业项目路演体验</li>
+                                <li><i class="fas fa-check text-success me-2"></i>外滩、豫园文化之旅</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="camp-price">
+                                <span class="h5 text-primary mb-0">¥6,800</span>
+                                <small class="text-muted">/人</small>
+                            </div>
+                            <button class="btn btn-primary" onclick="showCampDetail('shanghai')">
+                                <i class="fas fa-info-circle me-1"></i>了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 西安文化探索营 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card camp-card h-100">
+                    <div class="camp-image" style="background: linear-gradient(135deg, #ff8800, #e67700);">
+                        <div class="camp-badge">经典</div>
+                        <i class="fas fa-pagelines"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="camp-title">西安文化探索营</h5>
+                        <p class="camp-description">穿越千年古都，感受中华文明的深厚底蕴，体验传统文化魅力</p>
+                        
+                        <div class="camp-info mb-3">
+                            <div class="info-item">
+                                <i class="fas fa-calendar me-2"></i>
+                                <span>6天5夜</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users me-2"></i>
+                                <span>15-25人</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>西安</span>
+                            </div>
+                        </div>
+                        
+                        <div class="camp-highlights mb-3">
+                            <h6 class="fw-bold mb-2">项目亮点</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>兵马俑、大雁塔深度游</li>
+                                <li><i class="fas fa-check text-success me-2"></i>书法、剪纸文化体验</li>
+                                <li><i class="fas fa-check text-success me-2"></i>品尝地道陕西美食</li>
+                                <li><i class="fas fa-check text-success me-2"></i>古诗词朗诵比赛</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="camp-price">
+                                <span class="h5 text-primary mb-0">¥7,200</span>
+                                <small class="text-muted">/人</small>
+                            </div>
+                            <button class="btn btn-primary" onclick="showCampDetail('xian')">
+                                <i class="fas fa-info-circle me-1"></i>了解详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 安全保障 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">安全保障</h2>
+            <p class="lead text-muted">您的安全是我们的首要责任</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">全程保险</h5>
+                    <p class="text-muted">为每位学员购买全程旅行保险，保障人身安全</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(0, 200, 81, 0.1); color: #00c851;">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">医疗保障</h5>
+                    <p class="text-muted">配备专业医护人员，24小时健康监护</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(255, 136, 0, 0.1); color: #ff8800;">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">交通安全</h5>
+                    <p class="text-muted">选用正规旅游大巴，专业司机全程护航</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto mb-3" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">24小时联系</h5>
+                    <p class="text-muted">建立家长微信群，实时分享行程动态</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 往期回顾 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">往期精彩回顾</h2>
+            <p class="lead text-muted">看看往期学员的精彩瞬间</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-camera" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">北大校园合影</h6>
+                        <p class="text-muted mb-3">学员们在北京大学标志性建筑前合影留念</p>
+                        <small class="text-muted">2024年夏令营</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-brush" style="font-size: 3rem; color: var(--success-color);"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">书法体验课</h6>
+                        <p class="text-muted mb-3">学员们认真学习中国传统书法艺术</p>
+                        <small class="text-muted">2024年春令营</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-utensils" style="font-size: 3rem; color: var(--warning-color);"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">美食文化体验</h6>
+                        <p class="text-muted mb-3">品尝地道中国美食，了解饮食文化</p>
+                        <small class="text-muted">2023年冬令营</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 学员感言 -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">学员感言</h2>
+            <p class="lead text-muted">听听参与过研学项目的学员怎么说</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">L</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Lisa Chen</h6>
+                                <small class="text-muted">美国学生 · 北京名校营</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"这次北京之行让我对中国有了全新的认识。在北大的交流让我更加坚定了来中国留学的决心。感谢启梦教育的精心安排！"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-success d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">T</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Tran Minh</h6>
+                                <small class="text-muted">越南学生 · 上海科技营</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"上海的科技发展让我震撼！参观阿里巴巴总部，体验最新的AI技术，这些经历对我的专业学习帮助很大。"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="text-white fw-bold">M</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Maria Santos</h6>
+                                <small class="text-muted">菲律宾学生 · 西安文化营</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="text-muted">"西安的历史文化太丰富了！兵马俑的壮观让我终生难忘，书法课让我爱上了中国传统艺术。这是一次完美的文化之旅！"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 立即报名 -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-3">开启您的中国研学之旅</h2>
+                <p class="lead mb-0">专业的团队，精心的安排，安全的保障，让学习更有趣</p>
+            </div>
+            <div class="col-lg-4 text-end">
+                <button class="btn btn-light btn-lg me-3" data-bs-toggle="modal" data-bs-target="#enrollModal">
+                    <i class="fas fa-paper-plane me-2"></i>立即报名
+                </button>
+                <button class="btn btn-outline-light btn-lg" onclick="alert('功能开发中')">
+                    <i class="fas fa-download me-2"></i>下载手册
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 项目详情模态框 -->
+<div class="modal fade" id="campDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="campDetailTitle">项目详情</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="campDetailContent">
+                <!-- 项目详情内容将通过JavaScript动态加载 -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">立即报名</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 报名模态框 -->
+<div class="modal fade" id="enrollModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">研学项目报名</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="enrollForm">
+                    <div class="form-group">
+                        <label class="form-label">学员姓名</label>
+                        <input type="text" class="form-control" name="student_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">年龄</label>
+                        <input type="number" class="form-control" name="age" min="12" max="25" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">联系电话</label>
+                        <input type="tel" class="form-control" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">邮箱地址</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">选择项目</label>
+                        <select class="form-control" name="camp_project" required>
+                            <option value="">请选择项目</option>
+                            <option value="beijing">北京名校探访营 - ¥8,800</option>
+                            <option value="shanghai">上海科技创新营 - ¥6,800</option>
+                            <option value="xian">西安文化探索营 - ¥7,200</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">中文水平</label>
+                        <select class="form-control" name="chinese_level">
+                            <option value="">请选择</option>
+                            <option value="零基础">零基础</option>
+                            <option value="HSK1">HSK1</option>
+                            <option value="HSK2">HSK2</option>
+                            <option value="HSK3">HSK3</option>
+                            <option value="HSK4">HSK4</option>
+                            <option value="HSK5">HSK5</option>
+                            <option value="HSK6">HSK6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">特殊需求</label>
+                        <textarea class="form-control" name="special_requirements" rows="3" placeholder="如：饮食禁忌、健康状况等"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                我已阅读并同意<a href="#" class="text-primary">服务条款</a>和<a href="#" class="text-primary">安全协议</a>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitEnrollment()">提交报名</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.camp-card {
+    transition: all 0.3s ease;
+}
+
+.camp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.camp-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary-color), #004bb8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+    position: relative;
+}
+
+.camp-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.camp-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.camp-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+.camp-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.camp-highlights ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.camp-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 显示项目详情
+function showCampDetail(campId) {
+    const campDetails = {
+        'beijing': {
+            title: '北京名校探访营',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">项目介绍</h6>
+                        <p>深入探访北京大学、清华大学等中国顶尖学府，感受浓厚的学术氛围，与在校学生面对面交流，了解中国高等教育的特色和优势。</p>
+                        
+                        <h6 class="fw-bold mb-3">详细行程</h6>
+                        <ul>
+                            <li><strong>第1天：</strong>抵达北京，入住酒店，欢迎晚宴</li>
+                            <li><strong>第2天：</strong>北京大学校园参观，与学生交流座谈</li>
+                            <li><strong>第3天：</strong>清华大学参观，科技馆体验</li>
+                            <li><strong>第4天：</strong>故宫博物院，天安门广场</li>
+                            <li><strong>第5天：</strong>长城一日游，中文课程</li>
+                            <li><strong>第6天：</strong>颐和园，王府井购物</li>
+                            <li><strong>第7天：</strong>结营仪式，返程</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">学习收获</h6>
+                        <p>通过实地参观和深度交流，学员将全面了解中国高等教育体系，提升中文水平，建立国际友谊。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">项目信息</h6>
+                                <p><strong>时长：</strong>7天6夜</p>
+                                <p><strong>人数：</strong>15-20人</p>
+                                <p><strong>住宿：</strong>四星级酒店</p>
+                                <p><strong>餐食：</strong>中西结合</p>
+                                <p><strong>交通：</strong>豪华大巴</p>
+                                <p><strong>费用：</strong>¥8,800/人</p>
+                                <p><strong>包含：</strong>住宿、餐食、交通、门票、保险</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        'shanghai': {
+            title: '上海科技创新营',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">项目介绍</h6>
+                        <p>探索中国科技创新的前沿阵地，参观知名科技企业，体验最新科技成果，感受中国创新创业的蓬勃活力。</p>
+                        
+                        <h6 class="fw-bold mb-3">详细行程</h6>
+                        <ul>
+                            <li><strong>第1天：</strong>抵达上海，科技馆参观</li>
+                            <li><strong>第2天：</strong>阿里巴巴总部参观，AI体验</li>
+                            <li><strong>第3天：</strong>腾讯上海总部，创业园区</li>
+                            <li><strong>第4天：</strong>外滩观光，豫园文化体验</li>
+                            <li><strong>第5天：</strong>项目路演，结营仪式</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">特色体验</h6>
+                        <p>亲身体验人工智能、大数据等前沿技术，参与创业项目路演，培养创新思维。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">项目信息</h6>
+                                <p><strong>时长：</strong>5天4夜</p>
+                                <p><strong>人数：</strong>12-18人</p>
+                                <p><strong>住宿：</strong>商务酒店</p>
+                                <p><strong>餐食：</strong>特色美食</p>
+                                <p><strong>交通：</strong>地铁+大巴</p>
+                                <p><strong>费用：</strong>¥6,800/人</p>
+                                <p><strong>包含：</strong>住宿、餐食、交通、门票、保险</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        'xian': {
+            title: '西安文化探索营',
+            content: `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="fw-bold mb-3">项目介绍</h6>
+                        <p>穿越千年古都西安，感受中华文明的深厚底蕴，通过实地参观和文化体验，深入了解中国传统文化的魅力。</p>
+                        
+                        <h6 class="fw-bold mb-3">详细行程</h6>
+                        <ul>
+                            <li><strong>第1天：</strong>抵达西安，古城墙夜游</li>
+                            <li><strong>第2天：</strong>兵马俑博物馆，华清池</li>
+                            <li><strong>第3天：</strong>大雁塔，书法体验课</li>
+                            <li><strong>第4天：</strong>陕西历史博物馆，剪纸艺术</li>
+                            <li><strong>第5天：</strong>回民街美食，茶艺体验</li>
+                            <li><strong>第6天：</strong>古诗词朗诵比赛，返程</li>
+                        </ul>
+                        
+                        <h6 class="fw-bold mb-3">文化体验</h6>
+                        <p>深度体验书法、剪纸、茶艺等传统文化，品尝地道陕西美食，感受古都文化魅力。</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-3">项目信息</h6>
+                                <p><strong>时长：</strong>6天5夜</p>
+                                <p><strong>人数：</strong>15-25人</p>
+                                <p><strong>住宿：</strong>特色酒店</p>
+                                <p><strong>餐食：</strong>陕西美食</p>
+                                <p><strong>交通：</strong>旅游大巴</p>
+                                <p><strong>费用：</strong>¥7,200/人</p>
+                                <p><strong>包含：</strong>住宿、餐食、交通、门票、保险</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    };
+    
+    const camp = campDetails[campId];
+    if (camp) {
+        document.getElementById('campDetailTitle').textContent = camp.title;
+        document.getElementById('campDetailContent').innerHTML = camp.content;
+        new bootstrap.Modal(document.getElementById('campDetailModal')).show();
+    }
+}
+
+// 提交报名
+function submitEnrollment() {
+    const form = document.getElementById('enrollForm');
+    const formData = new FormData(form);
+    
+    // 简单验证
+    if (!formData.get('student_name') || !formData.get('phone') || !formData.get('camp_project')) {
+        alert('请填写必填信息');
+        return;
+    }
+    
+    if (!document.getElementById('agreeTerms').checked) {
+        alert('请同意服务条款和安全协议');
+        return;
+    }
+    
+    // 这里可以添加实际的提交逻辑
+    alert('报名成功！我们会在24小时内与您联系确认详细信息。');
+    bootstrap.Modal.getInstance(document.getElementById('enrollModal')).hide();
+    form.reset();
+}
+</script>
+{% endblock %}

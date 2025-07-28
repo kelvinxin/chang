@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}请假审批 - 教师系统{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-2 sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading">教师系统</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('teacher_dashboard') }}">
+                            <i class="fas fa-tachometer-alt"></i> 控制面板
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('teacher_classes') }}">
+                            <i class="fas fa-users"></i> 班级管理
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('teacher_schedule') }}">
+                            <i class="fas fa-calendar"></i> 课程表
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('teacher_materials') }}">
+                            <i class="fas fa-book"></i> 教学资料
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('teacher_leave_approval') }}">
+                            <i class="fas fa-calendar-check"></i> 请假审批
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">请假审批</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="filterRequests('all')">全部</button>
+                        <button type="button" class="btn btn-outline-warning btn-sm" onclick="filterRequests('pending')">待审批</button>
+                        <button type="button" class="btn btn-outline-success btn-sm" onclick="filterRequests('approved')">已批准</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="filterRequests('rejected')">已拒绝</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 统计卡片 -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">{{ leave_requests|selectattr('status', 'equalto', 'pending')|list|length }}</h5>
+                            <p class="card-text">待审批</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ leave_requests|selectattr('status', 'equalto', 'approved')|list|length }}</h5>
+                            <p class="card-text">已批准</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">{{ leave_requests|selectattr('status', 'equalto', 'rejected')|list|length }}</h5>
+                            <p class="card-text">已拒绝</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">{{ leave_requests|length }}</h5>
+                            <p class="card-text">总申请数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 请假申请列表 -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">请假申请列表</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>学生</th>
+                                    <th>课程</th>
+                                    <th>请假日期</th>
+                                    <th>申请时间</th>
+                                    <th>请假原因</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in leave_requests %}
+                                <tr class="leave-request" data-status="{{ request.status }}">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://via.placeholder.com/32" alt="头像" class="rounded-circle me-2" width="32" height="32">
+                                            <div>
+                                                <div class="fw-bold">{{ request.student.full_name or request.student.username }}</div>
+                                                <small class="text-muted">{{ request.student.username }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">{{ request.schedule.class.course.name }}</div>
+                                            <small class="text-muted">{{ request.schedule.class.name }}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">{{ request.schedule.start_time.strftime('%Y-%m-%d') }}</div>
+                                            <small class="text-muted">{{ request.schedule.start_time.strftime('%H:%M') }} - {{ request.schedule.end_time.strftime('%H:%M') }}</small>
+                                        </div>
+                                    </td>
+                                    <td>{{ request.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>
+                                        <span class="text-truncate d-inline-block" style="max-width: 150px;" title="{{ request.reason }}">
+                                            {{ request.reason }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if request.status == 'pending' %}
+                                            <span class="badge bg-warning">待审批</span>
+                                        {% elif request.status == 'approved' %}
+                                            <span class="badge bg-success">已批准</span>
+                                        {% elif request.status == 'rejected' %}
+                                            <span class="badge bg-danger">已拒绝</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if request.status == 'pending' %}
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-success btn-sm" 
+                                                        onclick="approveRequest('{{ request.id }}')">
+                                                    <i class="fas fa-check"></i> 批准
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm" 
+                                                        onclick="rejectRequest('{{ request.id }}')">
+                                                    <i class="fas fa-times"></i> 拒绝
+                                                </button>
+                                            </div>
+                                        {% else %}
+                                            <button type="button" class="btn btn-outline-info btn-sm" 
+                                                    onclick="viewDetails('{{ request.id }}')">
+                                                <i class="fas fa-eye"></i> 查看
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- 拒绝原因模态框 -->
+<div class="modal fade" id="rejectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">拒绝请假申请</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="rejectReason" class="form-label">拒绝原因</label>
+                    <textarea class="form-control" id="rejectReason" rows="3" placeholder="请输入拒绝原因..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" onclick="confirmReject()">确认拒绝</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentRequestId = null;
+
+function filterRequests(status) {
+    const rows = document.querySelectorAll('.leave-request');
+    rows.forEach(row => {
+        if (status === 'all' || row.dataset.status === status) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // 更新按钮状态
+    document.querySelectorAll('.btn-group button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
+function approveRequest(requestId) {
+    if (confirm('确认批准这个请假申请吗？')) {
+        fetch(`/api/leave-requests/${requestId}/approve`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('请假申请已批准！');
+                location.reload();
+            } else {
+                alert('操作失败：' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('操作失败，请重试');
+        });
+    }
+}
+
+function rejectRequest(requestId) {
+    currentRequestId = requestId;
+    new bootstrap.Modal(document.getElementById('rejectModal')).show();
+}
+
+function confirmReject() {
+    const reason = document.getElementById('rejectReason').value.trim();
+    if (!reason) {
+        alert('请输入拒绝原因');
+        return;
+    }
+    
+    fetch(`/api/leave-requests/${currentRequestId}/reject`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reason: reason })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('请假申请已拒绝！');
+            bootstrap.Modal.getInstance(document.getElementById('rejectModal')).hide();
+            location.reload();
+        } else {
+            alert('操作失败：' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('操作失败，请重试');
+    });
+}
+
+function viewDetails(requestId) {
+    // 查看详情功能
+    alert('查看详情功能待实现');
+}
+</script>
+{% endblock %}
